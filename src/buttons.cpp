@@ -35,6 +35,8 @@ NonInteractivePinButton::NonInteractivePinButton( const QString& text, Qt::Globa
 	QPalette palette( color );
 	setPalette( palette );
 
+	setStyleSheet( "QPushButton {color: white}" );
+
 	setEnabled( false );
 }
 
@@ -61,6 +63,8 @@ IOPin::IOPin( int address, QWidget* parent ) :
 	char text[256];
 	sprintf( text, "GPIO %d", _address );
 	setText( text );
+
+	reflectPinState();
 }
 
 // mousePressEvent
@@ -71,7 +75,25 @@ void IOPin::mousePressEvent( QMouseEvent* event ) {
 	try {
 		bool value = readPin( _address );
 		setPin( _address, (! value) );
+
+		reflectPinState();
 	} catch ( const exception& e ) {
 		fprintf( stderr, "Failed to toggle pin %d:\n\t%s\n", _address, e.what() );
+	}
+}
+
+// reflectPinState
+void IOPin::reflectPinState() {
+
+	try {
+		bool value = readPin( _address );
+
+		if ( value ) {
+			setPalette( QPalette( Qt::green ));
+		} else {
+			setPalette( QPalette( Qt::lightGray ));
+		}
+	} catch ( const exception& e ) {
+		fprintf( stderr, "Failed to get pin %d state:\n\t%s\n", _address, e.what() );
 	}
 }

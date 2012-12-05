@@ -133,6 +133,11 @@ class IOPin : public QPushButton {
 		 */
 		void mousePressEvent( QMouseEvent* event );
 
+		/**
+		 * Reflect pin state (adjust color)
+		 */
+		void reflectPinState();
+
 	private:
 
 		int _address;
