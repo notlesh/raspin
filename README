@@ -7,9 +7,9 @@ device could have unpredictable results.
 
 BUILDING
 
-The included build.xml uses the build tool ant with cpptasks. To build this, make sure ant and
-cpptasks are installed ("apt-get install ant-contrib-cpptasks" should suffice) and run "ant" 
-from the project root directory.
+The included build.xml uses the build tool ant with cpptasks. To build this,
+make sure ant and cpptasks are installed ("apt-get install ant-contrib-cpptasks"
+should suffice) and run "ant" from the project root directory.
 
 Alternatively, you can build this with a command like:
 
