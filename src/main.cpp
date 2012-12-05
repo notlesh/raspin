@@ -26,6 +26,8 @@
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QHBoxLayout>
 
+#include "buttons.h"
+
 // main
 int main( int argc, char *args[] ) {
 
@@ -42,19 +44,19 @@ int main( int argc, char *args[] ) {
 	QWidget* leftColumn = new QWidget( mainWidget );;
 	QVBoxLayout* leftColumnLayout = new QVBoxLayout( leftColumn );
 
-	QPushButton* pin1Button = new QPushButton( "3v3", leftColumn );
+	QPushButton* pin1Button = new ThreeVThreePinButton( leftColumn );
 	QPushButton* pin3Button = new QPushButton( "GPIO 0", leftColumn );
 	QPushButton* pin5Button = new QPushButton( "GPIO 1", leftColumn );
 	QPushButton* pin7Button = new QPushButton( "GPIO 4", leftColumn );
-	QPushButton* pin9Button = new QPushButton( "Ground", leftColumn );
+	QPushButton* pin9Button = new GroundPinButton( leftColumn );
 	QPushButton* pin11Button = new QPushButton( "GPIO 17", leftColumn );
 	QPushButton* pin13Button = new QPushButton( "GPIO 21", leftColumn );
 	QPushButton* pin15Button = new QPushButton( "GPIO 22", leftColumn );
-	QPushButton* pin17Button = new QPushButton( "3v3", leftColumn );
+	QPushButton* pin17Button = new ThreeVThreePinButton( leftColumn );
 	QPushButton* pin19Button = new QPushButton( "GPIO 10", leftColumn );
 	QPushButton* pin21Button = new QPushButton( "GPIO 9", leftColumn );
 	QPushButton* pin23Button = new QPushButton( "GPIO 11", leftColumn );
-	QPushButton* pin25Button = new QPushButton( "Ground", leftColumn );
+	QPushButton* pin25Button = new GroundPinButton( leftColumn );
 
 	leftColumnLayout->addWidget( pin1Button );
 	leftColumnLayout->addWidget( pin3Button );
@@ -75,16 +77,16 @@ int main( int argc, char *args[] ) {
 	QWidget* rightColumn = new QWidget( mainWidget );;
 	QVBoxLayout* rightColumnLayout = new QVBoxLayout( rightColumn );
 
-	QPushButton* pin2Button = new QPushButton( "5V", rightColumn );
-	QPushButton* pin4Button = new QPushButton( "5V", rightColumn );
-	QPushButton* pin6Button = new QPushButton( "Ground", rightColumn );
+	QPushButton* pin2Button = new FiveVoltPinButton( rightColumn );
+	QPushButton* pin4Button = new FiveVoltPinButton( rightColumn );
+	QPushButton* pin6Button = new GroundPinButton( rightColumn );
 	QPushButton* pin8Button = new QPushButton( "GPIO 14", rightColumn );
 	QPushButton* pin10Button = new QPushButton( "GPIO 15", rightColumn );
 	QPushButton* pin12Button = new QPushButton( "GPIO 18", rightColumn );
-	QPushButton* pin14Button = new QPushButton( "Ground", rightColumn );
+	QPushButton* pin14Button = new GroundPinButton( rightColumn );
 	QPushButton* pin16Button = new QPushButton( "GPIO 23", rightColumn );
 	QPushButton* pin18Button = new QPushButton( "GPIO 24", rightColumn );
-	QPushButton* pin20Button = new QPushButton( "Ground", rightColumn );
+	QPushButton* pin20Button = new GroundPinButton( rightColumn );
 	QPushButton* pin22Button = new QPushButton( "GPIO 25", rightColumn );
 	QPushButton* pin24Button = new QPushButton( "GPIO 8", rightColumn );
 	QPushButton* pin26Button = new QPushButton( "GPIO 7", rightColumn );
@@ -102,7 +104,6 @@ int main( int argc, char *args[] ) {
 	rightColumnLayout->addWidget( pin22Button );
 	rightColumnLayout->addWidget( pin24Button );
 	rightColumnLayout->addWidget( pin26Button );
-
 
 	
 	mainLayout->addWidget( leftColumn );
