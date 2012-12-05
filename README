@@ -3,3 +3,18 @@ written in C++ and is based on QT.
 
 Important: This is designed to run on a Raspberry Pi. Running this on any other
 device could have unpredictable results.
+
+BUILDING
+
+The included build.xml uses the build tool ant with cpptasks. To build this, make sure ant and
+cpptasks are installed ("apt-get install ant-contrib-cpptasks" should suffice) and run "ant" 
+from the project root directory.
+
+Alternatively, you can build this with a command like:
+
+g++ -I/usr/include/qt4 -I./include -lQtCore -lQtGui -o raspin src/*.cpp
+
+DEPENDENCIES
+
+raspin depends on Qt and gpio-admin:
+http://quick2wire.com/2012/05/safe-controlled-access-to-gpio-on-the-raspberry-pi/
