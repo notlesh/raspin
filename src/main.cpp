@@ -31,6 +31,9 @@
 // main
 int main( int argc, char *args[] ) {
 
+	// TODO: check that this machine resembles a raspberry pi
+	// TODO: make sure gpio-admin is available and that user is in group gpio
+
 	QApplication app( argc, args );
 
 	QMainWindow* window = new QMainWindow();
@@ -45,17 +48,17 @@ int main( int argc, char *args[] ) {
 	QVBoxLayout* leftColumnLayout = new QVBoxLayout( leftColumn );
 
 	QPushButton* pin1Button = new ThreeVThreePinButton( leftColumn );
-	QPushButton* pin3Button = new QPushButton( "GPIO 0", leftColumn );
-	QPushButton* pin5Button = new QPushButton( "GPIO 1", leftColumn );
-	QPushButton* pin7Button = new QPushButton( "GPIO 4", leftColumn );
+	QPushButton* pin3Button = new IOPin( 0, leftColumn );
+	QPushButton* pin5Button = new IOPin( 1, leftColumn );
+	QPushButton* pin7Button = new IOPin( 4, leftColumn );
 	QPushButton* pin9Button = new GroundPinButton( leftColumn );
-	QPushButton* pin11Button = new QPushButton( "GPIO 17", leftColumn );
-	QPushButton* pin13Button = new QPushButton( "GPIO 21", leftColumn );
-	QPushButton* pin15Button = new QPushButton( "GPIO 22", leftColumn );
+	QPushButton* pin11Button = new IOPin( 17, leftColumn );
+	QPushButton* pin13Button = new IOPin( 21, leftColumn );
+	QPushButton* pin15Button = new IOPin( 22, leftColumn );
 	QPushButton* pin17Button = new ThreeVThreePinButton( leftColumn );
-	QPushButton* pin19Button = new QPushButton( "GPIO 10", leftColumn );
-	QPushButton* pin21Button = new QPushButton( "GPIO 9", leftColumn );
-	QPushButton* pin23Button = new QPushButton( "GPIO 11", leftColumn );
+	QPushButton* pin19Button = new IOPin( 10, leftColumn );
+	QPushButton* pin21Button = new IOPin( 9, leftColumn );
+	QPushButton* pin23Button = new IOPin( 11, leftColumn );
 	QPushButton* pin25Button = new GroundPinButton( leftColumn );
 
 	leftColumnLayout->addWidget( pin1Button );
@@ -80,16 +83,16 @@ int main( int argc, char *args[] ) {
 	QPushButton* pin2Button = new FiveVoltPinButton( rightColumn );
 	QPushButton* pin4Button = new FiveVoltPinButton( rightColumn );
 	QPushButton* pin6Button = new GroundPinButton( rightColumn );
-	QPushButton* pin8Button = new QPushButton( "GPIO 14", rightColumn );
-	QPushButton* pin10Button = new QPushButton( "GPIO 15", rightColumn );
-	QPushButton* pin12Button = new QPushButton( "GPIO 18", rightColumn );
+	QPushButton* pin8Button = new IOPin( 14, rightColumn );
+	QPushButton* pin10Button = new IOPin( 15, rightColumn );
+	QPushButton* pin12Button = new IOPin( 18, rightColumn );
 	QPushButton* pin14Button = new GroundPinButton( rightColumn );
-	QPushButton* pin16Button = new QPushButton( "GPIO 23", rightColumn );
-	QPushButton* pin18Button = new QPushButton( "GPIO 24", rightColumn );
+	QPushButton* pin16Button = new IOPin( 23, rightColumn );
+	QPushButton* pin18Button = new IOPin( 24, rightColumn );
 	QPushButton* pin20Button = new GroundPinButton( rightColumn );
-	QPushButton* pin22Button = new QPushButton( "GPIO 25", rightColumn );
-	QPushButton* pin24Button = new QPushButton( "GPIO 8", rightColumn );
-	QPushButton* pin26Button = new QPushButton( "GPIO 7", rightColumn );
+	QPushButton* pin22Button = new IOPin( 25, rightColumn );
+	QPushButton* pin24Button = new IOPin( 8, rightColumn );
+	QPushButton* pin26Button = new IOPin( 7, rightColumn );
 
 	rightColumnLayout->addWidget( pin2Button );
 	rightColumnLayout->addWidget( pin4Button );

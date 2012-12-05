@@ -20,6 +20,8 @@
  * SOFTWARE.
  */
 
+#include <stdio.h>
+
 #include "buttons.h"
 
 // NonInteractivePinButton Constructor
@@ -45,4 +47,20 @@ ThreeVThreePinButton::ThreeVThreePinButton( QWidget* parent ) :
 // FiveVoltPinButton Constructor
 FiveVoltPinButton::FiveVoltPinButton( QWidget* parent ) :
 				NonInteractivePinButton( "5V", Qt::red, parent ) {
+}
+
+// IOPin Constructor
+IOPin::IOPin( int address, QWidget* parent ) :
+				QPushButton( parent ),
+				_address(address) {
+	
+	char text[256];
+	sprintf( text, "GPIO %d", _address );
+	setText( text );
+}
+
+// mousePressEvent
+void IOPin::mousePressEvent( QMouseEvent* event ) {
+
+	printf( "TODO: Toggle pin %d here!\n", _address );
 }

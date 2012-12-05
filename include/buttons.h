@@ -94,3 +94,47 @@ class FiveVoltPinButton : public NonInteractivePinButton {
 		virtual ~FiveVoltPinButton() { };
 };
 
+/**
+ * IOPin class.
+ */
+class IOPin : public QPushButton {
+
+	public:
+
+		/**
+		 * Constructor. Requires pin address in SOC numbering.
+		 *
+		 * @see http://quick2wire.com/2012/05/safe-controlled-access-to-gpio-on-the-raspberry-pi/
+		 * for a thorough explanation of pin addressing.
+		 */
+		IOPin( int address, QWidget* parent );
+
+		/**
+		 * Virtual Destructor
+		 */
+		virtual ~IOPin() { };
+
+		/**
+		 * Sets Address
+		 *
+		 * @param address is the new value for Address
+		 */
+		void setAddress( int address ) { _address = address; };
+		
+		/**
+		 * Returns Address
+		 *
+		 * @return Address
+		 */
+		int getAddress() const { return _address; };
+
+		/**
+		 * Mouse press event handler
+		 */
+		void mousePressEvent( QMouseEvent* event );
+
+	private:
+
+		int _address;
+
+};
