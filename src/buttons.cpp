@@ -74,7 +74,14 @@ void IOPin::mousePressEvent( QMouseEvent* event ) {
 
 	try {
 		bool value = readPin( _address );
-		setPin( _address, (! value) );
+		// XXX: hack, why does setPin() fail to turn on sometimes?
+		bool newValue = value;
+		int count = 0;
+		while ( newValue == value && count < 10 ) {
+			setPin( _address, (! value) );
+			newValue = readPin( _address );
+			count++;
+		}
 
 		reflectPinState();
 	} catch ( const exception& e ) {

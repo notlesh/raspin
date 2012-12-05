@@ -118,6 +118,8 @@ bool readPin( int address, bool exportAutomatically ) {
 // setPin
 void setPin( int address, bool value, bool setPinDirectionAutomatically, bool exportAutomatically ) {
 
+	printf( "Setting pin %d -> %s\n", address, (value ? "on" : "off") );
+
 	if ( exportAutomatically ) {
 		exportPin( address );
 	}
@@ -132,16 +134,15 @@ void setPin( int address, bool value, bool setPinDirectionAutomatically, bool ex
 	} else {
 		sprintf( buffer, "echo 0 > /sys/devices/virtual/gpio/gpio%d/value", address );
 	}
-	FILE* stream = popen( buffer, "r" );
-	if ( nullptr == stream ) {
+	int error = system( buffer );
+	if ( error ) {
 
 		if ( exportAutomatically ) {
 			unexportPin( address );
 		}
 
-		throw runtime_error( "Failed to read gpio pin value" );
+		throw runtime_error( "Failed to set gpio pin value" );
 	}
-	fclose( stream );
 
 	if ( exportAutomatically ) {
 		unexportPin( address );
