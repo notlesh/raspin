@@ -22,3 +22,8 @@ DEPENDENCIES
 
 raspin depends on Qt and gpio-admin:
 http://quick2wire.com/2012/05/safe-controlled-access-to-gpio-on-the-raspberry-pi/
+
+LICENSE
+
+This work is distributed under the terms of the MIT license. See the file
+"LICENSE" for a copy of the license.
