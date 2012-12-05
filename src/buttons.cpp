@@ -21,8 +21,12 @@
  */
 
 #include <stdio.h>
+#include <stdexcept>
 
 #include "buttons.h"
+#include "gpio_util.h"
+
+using std::exception;
 
 // NonInteractivePinButton Constructor
 NonInteractivePinButton::NonInteractivePinButton( const QString& text, Qt::GlobalColor color, QWidget* parent ) :
@@ -62,5 +66,12 @@ IOPin::IOPin( int address, QWidget* parent ) :
 // mousePressEvent
 void IOPin::mousePressEvent( QMouseEvent* event ) {
 
-	printf( "TODO: Toggle pin %d here!\n", _address );
+	printf( "Toggling pin %d here!\n", _address );
+
+	try {
+		bool value = readPin( _address );
+		setPin( _address, (! value) );
+	} catch ( const exception& e ) {
+		fprintf( stderr, "Failed to toggle pin %d:\n\t%s\n", _address, e.what() );
+	}
 }
