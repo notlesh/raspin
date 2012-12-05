@@ -4,6 +4,7 @@ written in C++ and is based on QT.
 Important: This is designed to run on a Raspberry Pi. Running this on any other
 device could have unpredictable results.
 
+
 BUILDING
 
 The included build.xml uses the build tool ant with cpptasks. To build this, make sure ant and
@@ -13,6 +14,9 @@ from the project root directory.
 Alternatively, you can build this with a command like:
 
 g++ -I/usr/include/qt4 -I./include -lQtCore -lQtGui -o raspin src/*.cpp
+
+If compiled with ant (successfully), you should have a build/raspin binary.
+
 
 DEPENDENCIES
 
