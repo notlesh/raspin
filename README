@@ -1,0 +1,5 @@
+raspin is a GUI frontend for controlling the GPIO pins on a Raspberry Pi. It's
+written in C++ and is based on QT.
+
+Important: This is designed to run on a Raspberry Pi. Running this on any other
+device could have unpredictable results.
