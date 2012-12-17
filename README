@@ -5,6 +5,24 @@ Important: This is designed to run on a Raspberry Pi. Running this on any other
 device could have unpredictable results.
 
 
+DEPENDENCIES
+
+raspin depends on qt. on ubuntu (etc) you can get this by:
+
+sudo apt-get update && sudo apt-get install qt3-dev-tools qt4-dev-tools
+
+if you would like to build with ant, you'll need some other stuff:
+
+sudo apt-get update && sudo apt-get install ant ant-contrib-cpptasks openjdk-6-jdk openjdk-6-jre
+
+raspin depends on Qt and gpio-admin:
+http://quick2wire.com/2012/05/safe-controlled-access-to-gpio-on-the-raspberry-pi/
+
+and, of course, you'll need git to check out:
+
+sudo apt-get update && sudo apt-get install git git-core
+
+
 BUILDING
 
 The included build.xml uses the build tool ant with cpptasks. To build this,
@@ -13,15 +31,10 @@ should suffice) and run "ant" from the project root directory.
 
 Alternatively, you can build this with a command like:
 
-g++ -I/usr/include/qt4 -I./include -lQtCore -lQtGui -o raspin src/*.cpp
+g++ -std=c++0x -I/usr/include/qt4 -I./include -lQtCore -lQtGui -o raspin src/*.cpp
 
 If compiled with ant (successfully), you should have a build/raspin binary.
 
-
-DEPENDENCIES
-
-raspin depends on Qt and gpio-admin:
-http://quick2wire.com/2012/05/safe-controlled-access-to-gpio-on-the-raspberry-pi/
 
 LICENSE
 
