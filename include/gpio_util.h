@@ -23,6 +23,11 @@
 #include <stdio.h>
 
 /**
+ * Initialize. Should be called at start up.
+ */
+void initializeGPIO();
+
+/**
  * Export a pin. Should be called before reading or setting a pin (called automatically by readPin()
  * and setPin(), setPin(), and setPinDirection() if exportAutomatically == true).
  */

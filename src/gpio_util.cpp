@@ -22,31 +22,52 @@
 
 #include <stdexcept>
 
+#include <wiringPi.h>
+
 #include "gpio_util.h"
 
+// #define WIRING_PI_USE_SYS // uncomment to use GPIO interface in /sys, doesn't require root. not working currently...
+
 using std::runtime_error;
+
+// initialize
+void initializeGPIO() {
+
+#ifdef WIRING_PI_USE_SYS
+	int error = wiringPiSetupSys(); // uses gpio interface in /sys and doesn't require root
+#else
+	int error = wiringPiSetupGpio(); // requires root, also very fast.
+#endif
+	if ( error ) {
+		printf( "Error initializing (wiringPiSetupSys()): %d\n", error );
+	}
+}
 
 // exportPin
 void exportPin( int address ) {
 
+#ifdef WIRING_PI_USE_SYS
 	char buffer[256];
 	sprintf( buffer, "/usr/local/bin/gpio-admin export %d", address );
 	int error = system( buffer );
 	if ( error ) {
 		throw runtime_error( "Failed to execute gpio-admin" );
 	}
+#endif
 
 }
 
 // unexportPin
 void unexportPin( int address ) {
 
+#ifdef WIRING_PI_USE_SYS
 	char buffer[256];
 	sprintf( buffer, "/usr/local/bin/gpio-admin unexport %d", address );
 	int error = system( buffer );
 	if ( error ) {
 		throw runtime_error( "Failed to execute gpio-admin" );
 	}
+#endif
 
 }
 
@@ -57,22 +78,7 @@ void setPinDirection( int address, bool direction, bool exportAutomatically ) {
 		exportPin( address );
 	}
 
-	char buffer[256];
-	if ( direction ) {
-		sprintf( buffer, "echo out > /sys/devices/virtual/gpio/gpio%d/direction", address );
-	} else {
-		sprintf( buffer, "echo in > /sys/devices/virtual/gpio/gpio%d/direction", address );
-	}
-
-	FILE* stream = popen( buffer, "r" );
-	if ( nullptr == stream ) {
-
-		if ( exportAutomatically ) {
-			unexportPin( address );
-		}
-
-		throw runtime_error( "Failed to set gpio pin direction" );
-	}
+	pinMode( address, direction ? OUTPUT : INPUT );
 
 	if ( exportAutomatically ) {
 		unexportPin( address );
@@ -87,38 +93,18 @@ bool readPin( int address, bool exportAutomatically ) {
 		exportPin( address );
 	}
 
-	char buffer[256];
-	sprintf( buffer, "cat /sys/devices/virtual/gpio/gpio%d/value", address );
-	FILE* stream = popen( buffer, "r" );
-	if ( nullptr == stream ) {
-
-		if ( exportAutomatically ) {
-			unexportPin( address );
-		}
-
-		throw runtime_error( "Failed to read gpio pin value" );
-	}
-
-	char c = fgetc( stream );
-	fclose( stream );
+	bool value = (bool)digitalRead( address );
 
 	if ( exportAutomatically ) {
 		unexportPin( address );
 	}
 
-	if ( c == '0' ) {
-		return 0;
-	} else if ( c == '1' ) {
-		return 1;
-	} else {
-		throw runtime_error( "Failed to read gpio pin value (unrecognized value)" );
-	}
+	return value;
 }
 
 // setPin
 void setPin( int address, bool value, bool setPinDirectionAutomatically, bool exportAutomatically ) {
 
-	printf( "Setting pin %d -> %s\n", address, (value ? "on" : "off") );
 
 	if ( exportAutomatically ) {
 		exportPin( address );
@@ -128,21 +114,7 @@ void setPin( int address, bool value, bool setPinDirectionAutomatically, bool ex
 		setPinDirection( address, true, false );
 	}
 
-	char buffer[256];
-	if ( value ) {
-		sprintf( buffer, "echo 1 > /sys/devices/virtual/gpio/gpio%d/value", address );
-	} else {
-		sprintf( buffer, "echo 0 > /sys/devices/virtual/gpio/gpio%d/value", address );
-	}
-	int error = system( buffer );
-	if ( error ) {
-
-		if ( exportAutomatically ) {
-			unexportPin( address );
-		}
-
-		throw runtime_error( "Failed to set gpio pin value" );
-	}
+	digitalWrite( address, value ? 1 : 0 );
 
 	if ( exportAutomatically ) {
 		unexportPin( address );

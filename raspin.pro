@@ -9,6 +9,7 @@ QMAKE_CXX = colorgcc
 INCLUDEPATH += include/ \
 
 LIBS += -lstdc++ \
+		-L/usr/local/lib -lwiringPi \
 
 SOURCES = $$files(src/*.cpp) \
 

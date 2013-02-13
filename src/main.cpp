@@ -27,9 +27,12 @@
 #include <QtGui/QHBoxLayout>
 
 #include "buttons.h"
+#include "gpio_util.h"
 
 // main
 int main( int argc, char *args[] ) {
+
+	initializeGPIO();
 
 	// TODO: check that this machine resembles a raspberry pi
 	// TODO: make sure gpio-admin is available and that user is in group gpio
