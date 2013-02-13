@@ -25,15 +25,14 @@ sudo apt-get update && sudo apt-get install git git-core
 
 BUILDING
 
-The included build.xml uses the build tool ant with cpptasks. To build this,
-make sure ant and cpptasks are installed ("apt-get install ant-contrib-cpptasks"
-should suffice) and run "ant" from the project root directory.
+The build system uses qmake, which should be installed with qt (try 'apt-get 
+install libqt4-dev'). You'll also need "colorgcc" ('apt-get install colorgcc').
+Run "qmake" and then "make" to build. You should then have a "raspin" binary in 
+"debug/". 
 
 Alternatively, you can build this with a command like:
 
 g++ -std=c++0x -I/usr/include/qt4 -I./include -lQtCore -lQtGui -o raspin src/*.cpp
-
-If compiled with ant (successfully), you should have a build/raspin binary.
 
 
 LICENSE
